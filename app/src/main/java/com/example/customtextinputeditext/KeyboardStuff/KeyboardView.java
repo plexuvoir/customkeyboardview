@@ -145,10 +145,10 @@ public class KeyboardView extends View implements View.OnClickListener {
 
     private Paint mPaint;
     private Rect mPadding;
-    private int mPaddingLeft;
-    private int mPaddingRight;
-    private int mPaddingTop;
-    private int mPaddingBottom;
+//    private int mPaddingLeft;
+//    private int mPaddingRight;
+//    private int mPaddingTop;
+//    private int mPaddingBottom;
 
     private long mDownTime;
     private long mLastMoveTime;
@@ -220,6 +220,16 @@ public class KeyboardView extends View implements View.OnClickListener {
         int keyTextSize = 0;
         int n = a.getIndexCount();
 
+        mVerticalCorrection = 0;
+        previewLayout = 0;
+        mPreviewOffset = 0;
+        mPreviewHeight = 80;
+        mKeyTextSize = 18;
+        mLabelTextSize = 14;
+        mKeyTextColor = 0xFF000000;
+        mPopupLayout = 0;
+
+
         for (int i = 0; i < n; i++) {
             int attr = a.getIndex(i);
             switch (attr) {
@@ -250,6 +260,7 @@ public class KeyboardView extends View implements View.OnClickListener {
                 case R.styleable.KeyboardView_popupLayout:
                     mPopupLayout = a.getResourceId(attr, 0);
                     break;
+
             }
         }
 
@@ -285,10 +296,10 @@ public class KeyboardView extends View implements View.OnClickListener {
         mPadding = new Rect(0, 0, 0, 0);
         mMiniKeyboardCache = new HashMap<Keyboard.Key,View>();
         mKeyBackground.getPadding(mPadding);
-        mPaddingLeft = mPadding.left;
-        mPaddingRight = mPadding.right;
-        mPaddingTop = mPadding.top;
-        mPaddingBottom = mPadding.bottom;
+//        mPaddingLeft = mPadding.left;
+//        mPaddingRight = mPadding.right;
+//        mPaddingTop = mPadding.top;
+//        mPaddingBottom = mPadding.bottom;
 
 
         resetMultiTap();
@@ -435,14 +446,18 @@ public class KeyboardView extends View implements View.OnClickListener {
     @Override
     public void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         // Round up a little
+        int paddingLeft = getPaddingLeft();
+        int paddingRight = getPaddingRight();
+        int paddingTop = getPaddingTop();
+        int paddingBottom = getPaddingBottom();
         if (mKeyboard == null) {
-            setMeasuredDimension(mPaddingLeft + mPaddingRight, mPaddingTop + mPaddingBottom);
+            setMeasuredDimension(paddingLeft + paddingRight, paddingTop + paddingBottom);
         } else {
-            int width = mKeyboard.getMinWidth() + mPaddingLeft + mPaddingRight;
+            int width = mKeyboard.getMinWidth() + paddingLeft + paddingRight;
             if (MeasureSpec.getSize(widthMeasureSpec) < width + 10) {
                 width = MeasureSpec.getSize(widthMeasureSpec);
             }
-            setMeasuredDimension(width, mKeyboard.getHeight() + mPaddingTop + mPaddingBottom);
+            setMeasuredDimension(width, mKeyboard.getHeight() + paddingTop + paddingBottom);
         }
     }
     /**
@@ -475,8 +490,8 @@ public class KeyboardView extends View implements View.OnClickListener {
         //final int descent = (int) paint.descent();
         final Drawable keyBackground = mKeyBackground;
         final Rect padding = mPadding;
-        final int kbdPaddingLeft = mPaddingLeft;
-        final int kbdPaddingTop = mPaddingTop;
+        final int kbdPaddingLeft = getPaddingLeft();
+        final int kbdPaddingTop = getPaddingTop();
         List<Keyboard.Key> keys = mKeyboard.getKeys();
         //canvas.translate(0, mKeyboardPaddingTop);
         paint.setAlpha(255);
@@ -518,6 +533,7 @@ public class KeyboardView extends View implements View.OnClickListener {
                         paint);
                 // Turn off drop shadow
                 paint.setShadowLayer(0, 0, 0, 0);
+
             } else if (key.icon != null) {
                 final int drawableX = (key.width - padding.left - padding.right
                         - key.icon.getIntrinsicWidth()) / 2 + padding.left;
@@ -548,6 +564,10 @@ public class KeyboardView extends View implements View.OnClickListener {
             canvas.drawCircle((mStartX + mLastX) / 2, (mStartY + mLastY) / 2, 2, paint);
         }
     }
+
+
+
+
     private void playKeyClick() {
         if (mSoundOn) {
             playSoundEffect(0);
@@ -711,7 +731,7 @@ public class KeyboardView extends View implements View.OnClickListener {
                 previewPopup.setWidth(popupWidth);
                 previewPopup.setHeight(popupHeight);
                 if (!mPreviewCentered) {
-                    mPopupPreviewX = key.x - mPreviewText.getPaddingLeft() + mPaddingLeft;
+                    mPopupPreviewX = key.x - mPreviewText.getPaddingLeft() + getPaddingLeft();
                     mPopupPreviewY = key.y - popupHeight + mPreviewOffset;
                 } else {
                     // TODO: Fix this if centering is brought back
@@ -745,9 +765,11 @@ public class KeyboardView extends View implements View.OnClickListener {
         if (keyIndex < 0 || keyIndex >= mKeyboard.getKeys().size()) {
             return;
         }
+        int paddingLeft = getPaddingLeft();
+        int paddingTop = getPaddingTop();
         final Keyboard.Key key = mKeyboard.getKeys().get(keyIndex);
-        invalidate(key.x + mPaddingLeft, key.y + mPaddingTop,
-                key.x + key.width + mPaddingLeft, key.y + key.height + mPaddingTop);
+        invalidate(key.x + paddingLeft, key.y + paddingTop,
+                key.x + key.width + paddingLeft, key.y + key.height + paddingTop);
     }
     private boolean openPopupIfRequired(MotionEvent me) {
         // Check if we have a popup layout specified first.
@@ -819,8 +841,8 @@ public class KeyboardView extends View implements View.OnClickListener {
                 mWindowOffset = new int[2];
                 getLocationInWindow(mWindowOffset);
             }
-            mPopupX = popupKey.x + mPaddingLeft;
-            mPopupY = popupKey.y + mPaddingTop;
+            mPopupX = popupKey.x + getPaddingLeft();
+            mPopupY = popupKey.y + getPaddingTop();
             mPopupX = mPopupX + popupKey.width - mMiniKeyboardContainer.getMeasuredWidth();
             mPopupY = mPopupY - mMiniKeyboardContainer.getMeasuredHeight();
             final int x = mPopupX + mMiniKeyboardContainer.getPaddingRight() + mWindowOffset[0];
@@ -841,8 +863,8 @@ public class KeyboardView extends View implements View.OnClickListener {
 
     @Override
     public boolean onTouchEvent(MotionEvent me) {
-        int touchX = (int) me.getX() - mPaddingLeft;
-        int touchY = (int) me.getY() + mVerticalCorrection - mPaddingTop;
+        int touchX = (int) me.getX() - getPaddingLeft();
+        int touchY = (int) me.getY() + mVerticalCorrection - getPaddingTop();
         int action = me.getAction();
         long eventTime = me.getEventTime();
         int keyIndex = getKeyIndices(touchX, touchY, null);
