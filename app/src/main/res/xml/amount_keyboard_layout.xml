@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Keyboard xmlns:android="http://schemas.android.com/apk/res/android"
-          android:keyWidth="12%p"
-          android:keyHeight="9%p">
+<Keyboard xmlns:app="http://schemas.android.com/apk/res-auto"
+          app:keyWidth="12%p"
+          app:keyHeight="9%p">
     <Row>
-        <Key android:codes="49"    android:keyLabel="1" android:keyWidth="25%p" android:keyEdgeFlags="left" />
-        <Key android:codes="50"    android:keyLabel="2" android:keyWidth="25%p" />
-        <Key android:codes="51"    android:keyLabel="3" android:keyWidth="25%p" />
+        <Key app:codes="49"    app:keyLabel="1" app:keyWidth="25%p" app:keyEdgeFlags="left" />
+        <Key app:codes="50"    app:keyLabel="2" app:keyWidth="25%p" />
+        <Key app:codes="51"    app:keyLabel="3" app:keyWidth="25%p" />
 
-        <Key android:codes="-5" android:keyIcon="@drawable/ic_sym_keyboard_delete" android:keyWidth="25%p" android:isRepeatable="true" android:keyEdgeFlags="right"/>
+        <Key app:codes="-5" app:keyIcon="@drawable/ic_sym_keyboard_delete" app:keyWidth="25%p" app:isRepeatable="true" app:keyEdgeFlags="right"/>
     </Row>
     <Row>
-        <Key android:codes="52"    android:keyLabel="4" android:keyWidth="25%p" android:keyEdgeFlags="left"  />
-        <Key android:codes="53"    android:keyLabel="5" android:keyWidth="25%p"/>
-        <Key android:codes="54"    android:keyLabel="6" android:keyWidth="25%p"/>
+        <Key app:codes="52"    app:keyLabel="4" app:keyWidth="25%p" app:keyEdgeFlags="left"  />
+        <Key app:codes="53"    app:keyLabel="5" app:keyWidth="25%p"/>
+        <Key app:codes="54"    app:keyLabel="6" app:keyWidth="25%p"/>
 
-        <Key android:codes="-3" android:keyLabel="CLR" android:keyWidth="25%p" android:keyEdgeFlags="right" />
+        <Key app:codes="-3" app:keyLabel="CLR" app:keyWidth="25%p" app:keyEdgeFlags="right" />
     </Row>
     <Row>
-        <Key android:codes="55"    android:keyLabel="7" android:keyWidth="25%p" android:keyEdgeFlags="left" />
-        <Key android:codes="56"    android:keyLabel="8" android:keyWidth="25%p"/>
-        <Key android:codes="57"    android:keyLabel="9" android:keyWidth="25%p" />
+        <Key app:codes="55"    app:keyLabel="7" app:keyWidth="25%p" app:keyEdgeFlags="left" />
+        <Key app:codes="56"    app:keyLabel="8" app:keyWidth="25%p"/>
+        <Key app:codes="57"    app:keyLabel="9" app:keyWidth="25%p" />
 
-        <Key android:codes="46" android:keyLabel="." android:keyWidth="25%p" android:keyEdgeFlags="right" />
+        <Key app:codes="46" app:keyLabel="." app:keyWidth="25%p" app:keyEdgeFlags="right" />
     </Row>
     <Row>
-        <Key android:codes="0" android:keyLabel=" " android:keyWidth="25%p" android:keyEdgeFlags="left" />
-        <Key android:codes="48" android:keyLabel="0" android:keyWidth="25%p" />
-        <Key android:codes="0" android:keyLabel=" " android:keyWidth="25%p" />
-        <Key android:codes="-4" android:keyLabel="Done" android:keyWidth="25%p" android:keyEdgeFlags="right" />
+        <Key app:codes="0" app:keyLabel=" " app:keyWidth="25%p" app:keyEdgeFlags="left" />
+        <Key app:codes="48" app:keyLabel="0" app:keyWidth="25%p" />
+        <Key app:codes="0" app:keyLabel=" " app:keyWidth="25%p" />
+        <Key app:codes="-4" app:keyLabel="Done" app:keyWidth="25%p" app:keyEdgeFlags="right" />
     </Row>
 </Keyboard>
