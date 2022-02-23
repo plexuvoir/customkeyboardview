@@ -26,7 +26,7 @@
     <Row>
         <Key app:codes="0" app:keyLabel=" " app:keyWidth="25%p" app:keyEdgeFlags="left" />
         <Key app:codes="48" app:keyLabel="0" app:keyWidth="25%p" />
-        <Key app:codes="0" app:keyLabel=" " app:keyWidth="25%p" />
+        <Key app:codes="47" app:keyLabel="000" app:keyWidth="25%p" />
         <Key app:codes="-4" app:keyLabel="Done" app:keyWidth="25%p" app:keyEdgeFlags="right" />
     </Row>
 </Keyboard>

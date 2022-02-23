@@ -54,6 +54,7 @@ public class MainActivity : AppCompatActivity() {
                             46 -> if(amountEditText.text?.contains('.')!!)  editable?.insert(start, Character.toString(primaryCode.toChar()))
                             //-4 -> {}
                             0 -> {}
+                            47 -> editable?.insert(start, "000")
                             else -> editable?.insert(start, Character.toString(primaryCode.toChar()))
                         }
                     }
