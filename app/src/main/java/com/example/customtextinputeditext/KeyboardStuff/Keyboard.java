@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.content.res.XmlResourceParser;
+
+import com.example.customtextinputeditext.Annotation.UnsupportedAppUsage;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.text.TextUtils;
@@ -64,21 +66,21 @@ public class Keyboard {
     private int mKeyHeight;
 
     /** Total height of the keyboard, including the padding and keys */
-
+    @UnsupportedAppUsage
     private int mTotalHeight;
 
     /**
      * Total width of the keyboard, including left side gaps and keys, but not any gaps on the
      * right side.
      */
-
+    @UnsupportedAppUsage
     private int mTotalWidth;
 
     /** List of keys in this keyboard */
     private List<Key> mKeys;
 
     /** List of modifier keys such as Shift & Alt, if any */
-
+    @UnsupportedAppUsage
     private List<Key> mModifierKeys;
 
     /** Width of the screen available to fit the keyboard */
@@ -547,37 +549,37 @@ public class Keyboard {
         mTotalHeight = y + mDefaultHeight;
         rows.add(row);
     }
-//    @UnsupportedAppUsage(maxTargetSdk = Build.VERSION_CODES.P, trackingBug = 115609023)
-//    final void resize(int newWidth, int newHeight) {
-//        int numRows = rows.size();
-//        for (int rowIndex = 0; rowIndex < numRows; ++rowIndex) {
-//            Row row = rows.get(rowIndex);
-//            int numKeys = row.mKeys.size();
-//            int totalGap = 0;
-//            int totalWidth = 0;
-//            for (int keyIndex = 0; keyIndex < numKeys; ++keyIndex) {
-//                Key key = row.mKeys.get(keyIndex);
-//                if (keyIndex > 0) {
-//                    totalGap += key.gap;
-//                }
-//                totalWidth += key.width;
-//            }
-//            if (totalGap + totalWidth > newWidth) {
-//                int x = 0;
-//                float scaleFactor = (float)(newWidth - totalGap) / totalWidth;
-//                for (int keyIndex = 0; keyIndex < numKeys; ++keyIndex) {
-//                    Key key = row.mKeys.get(keyIndex);
-//                    key.width *= scaleFactor;
-//                    key.x = x;
-//                    x += key.width + key.gap;
-//                }
-//            }
-//        }
-//        mTotalWidth = newWidth;
-//        // TODO: This does not adjust the vertical placement according to the new size.
-//        // The main problem in the previous code was horizontal placement/size, but we should
-//        // also recalculate the vertical sizes/positions when we get this resize call.
-//    }
+    @UnsupportedAppUsage(maxTargetSdk = Build.VERSION_CODES.P, trackingBug = 115609023)
+    final void resize(int newWidth, int newHeight) {
+        int numRows = rows.size();
+        for (int rowIndex = 0; rowIndex < numRows; ++rowIndex) {
+            Row row = rows.get(rowIndex);
+            int numKeys = row.mKeys.size();
+            int totalGap = 0;
+            int totalWidth = 0;
+            for (int keyIndex = 0; keyIndex < numKeys; ++keyIndex) {
+                Key key = row.mKeys.get(keyIndex);
+                if (keyIndex > 0) {
+                    totalGap += key.gap;
+                }
+                totalWidth += key.width;
+            }
+            if (totalGap + totalWidth > newWidth) {
+                int x = 0;
+                float scaleFactor = (float)(newWidth - totalGap) / totalWidth;
+                for (int keyIndex = 0; keyIndex < numKeys; ++keyIndex) {
+                    Key key = row.mKeys.get(keyIndex);
+                    key.width *= scaleFactor;
+                    key.x = x;
+                    x += key.width + key.gap;
+                }
+            }
+        }
+        mTotalWidth = newWidth;
+        // TODO: This does not adjust the vertical placement according to the new size.
+        // The main problem in the previous code was horizontal placement/size, but we should
+        // also recalculate the vertical sizes/positions when we get this resize call.
+    }
 
     public List<Key> getKeys() {
         return mKeys;
